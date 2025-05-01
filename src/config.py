@@ -5,9 +5,16 @@ NUM_CLASSES         = 200
 BATCH_SIZE          = 512
 VAL_EVERY_N_EPOCH   = 1
 
-NUM_EPOCHS          = 40
-OPTIMIZER_PARAMS    = {'type': 'SGD', 'lr': 0.005, 'momentum': 0.9}
-SCHEDULER_PARAMS    = {'type': 'MultiStepLR', 'milestones': [30, 35], 'gamma': 0.2}
+NUM_EPOCHS          = 50
+#OPTIMIZER_PARAMS    = {'type': 'SGD', 'lr': 0.005, 'momentum': 0.9}
+OPTIMIZER_PARAMS = {
+    'type': 'Adam',
+    'lr': 0.001,
+    'betas': (0.9, 0.999),
+    'weight_decay': 0.0001
+}
+SCHEDULER_PARAMS    = {'type': 'MultiStepLR', 'milestones': [15, 30], 'gamma': 0.2}
+
 
 # Dataaset
 DATASET_ROOT_PATH   = 'datasets/'
@@ -22,7 +29,7 @@ IMAGE_MEAN          = [0.4802, 0.4481, 0.3975]
 IMAGE_STD           = [0.2302, 0.2265, 0.2262]
 
 # Network
-MODEL_NAME          = 'resnet18'
+MODEL_NAME          = 'efficientnet_b4'
 
 # Compute related
 ACCELERATOR         = 'gpu'

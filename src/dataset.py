@@ -28,7 +28,7 @@ class TinyImageNetDatasetModule(LightningDataModule):
             # download data
             print(colored("\nDownloading dataset...", color='green', attrs=('bold',)))
             filename = self.__DATASET_NAME__ + '.tar'
-            wget.download(f'https://hyu-aue8088.s3.ap-northeast-2.amazonaws.com/{filename}')
+            # wget.download(f'https://hyu-aue8088.s3.ap-northeast-2.amazonaws.com/{filename}')
 
             # extract data
             print(colored("\nExtract dataset...", color='green', attrs=('bold',)))

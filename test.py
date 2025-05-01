@@ -31,7 +31,7 @@ if __name__ == "__main__":
     )
 
     datamodule = TinyImageNetDatasetModule(
-        batch_size = 1,
+        batch_size = 512,
     )
 
     trainer = Trainer(
@@ -47,7 +47,20 @@ if __name__ == "__main__":
 
     # FLOP counter
     x, y = next(iter(datamodule.test_dataloader()))
-    flop_counter = FlopCounterMode(model, depth=1)
+    x = x.to(cfg.DEVICES[0] if isinstance(cfg.DEVICES, list) else cfg.DEVICES)
 
-    with flop_counter:
-        model(x)
+    device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
+
+    model.eval()
+    model = model.to(device)
+
+    x, _ = next(iter(datamodule.test_dataloader()))
+    x = x.to(device)
+
+    with FlopCounterMode(model, display=True) as flop_counter:
+        with torch.no_grad():
+            model(x)
+
+    print(f"Total FLOPs: {flop_counter.get_total_flops() / 1e9:.2f} GFLOPs")
+
+

@@ -1,6 +1,15 @@
 # HYU-AUE8088, Understanding and Utilizing Deep Learning
 ## PA #1. Image Classification
 
+# run_multi_train.sh
+Run "train.py" with model_names {, , , ...} repeately
+
+# size_accuracy_trade_off.py
+Visualize Effientnet family's size-accuracy trade-off
+
+
+
+
 # Files
 
 ```bash
